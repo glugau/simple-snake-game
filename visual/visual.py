@@ -127,7 +127,7 @@ def visual_game(board_height, board_width, max_screen_size, fps):
                 snake.eat()
 
             if snake.is_colliding():
-                message_text, message_text_rect = write("Game lost! Your score was " + str(len(snake.bodypos) + 1),
+                message_text, message_text_rect = write("Game over! Your score was " + str(len(snake.bodypos) + 1),
                                                         (screen_size[1] / 2) - fontsize,
                                                         screen_size[0], font_small)
                 if len(snake.bodypos) + 1 > best_score:
