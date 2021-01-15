@@ -1,6 +1,7 @@
 class Snake:
     board_width = 0
     board_height = 0
+    max_screen_size = 0
     directions = {
         "up": [0, -1],
         "down": [0, 1],
