@@ -1,5 +1,4 @@
 def make_screen_size(board_width, board_height, max_size):
-    out = (0, 0)
     if board_width >= board_height:
         mult = float(max_size) / float(board_width)
     else:

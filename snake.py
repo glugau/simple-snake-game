@@ -1,3 +1,15 @@
+def opposite_dir(direction):
+    if direction == "up":
+        return "down"
+    elif direction == "down":
+        return "up"
+    elif direction == "left":
+        return "right"
+    elif direction == "right":
+        return "left"
+    return "not valid"
+
+
 class Snake:
     board_width = 0
     board_height = 0
@@ -21,17 +33,6 @@ class Snake:
             "up",
             "up"
         ]
-
-    def opposite_dir(self, direction):
-        if direction == "up":
-            return "down"
-        elif direction == "down":
-            return "up"
-        elif direction == "left":
-            return "right"
-        elif direction == "right":
-            return "left"
-        return "not valid"
 
     def change_direction(self, axis):
         if self.direction == "up" and axis == "down":
@@ -79,4 +80,5 @@ class Snake:
         self.bodypos.append(self.bodypos[-1])
         self.direction_history.append(self.direction_history[-1])
 
-        self.bodypos[-1] = [self.bodypos[-1][0] + Snake.directions[self.opposite_dir(self.direction_history[-1])][0], self.bodypos[-1][1] + Snake.directions[self.opposite_dir(self.direction_history[-1])][1]]
+        self.bodypos[-1] = [self.bodypos[-1][0] + Snake.directions[opposite_dir(self.direction_history[-1])][0],
+                            self.bodypos[-1][1] + Snake.directions[opposite_dir(self.direction_history[-1])][1]]

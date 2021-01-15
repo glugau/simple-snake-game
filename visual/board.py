@@ -1,4 +1,6 @@
 import pygame as pg
+
+
 class Board:
     tiles = [
         pg.image.load("./assets/boardtiles/boardtile2.png"),
@@ -6,6 +8,7 @@ class Board:
     ]
     board_height = 0
     board_width = 0
+
     def __init__(self, board_width, board_height, screen_size):
         self.board_size = (screen_size[0] - 100, screen_size[1] - 100)
         self.cell_size = int(self.board_size[0] / board_width)
@@ -25,6 +28,7 @@ class Board:
                 currentx += self.cell_size
             self.tiles_position.append(hor)
             currenty += self.cell_size
+
     def draw(self, screen):
         firstim = True
         for i in self.tiles_position:
@@ -34,6 +38,7 @@ class Board:
                 else:
                     screen.blit(Board.tiles[1], (int(el[0] + 50), int(el[1] + 50)))
                 firstim = not firstim
+
     def draw_element(self, image, pos, screen):
         if 0 <= pos[0] < Board.board_width and 0 <= pos[1] < Board.board_height:
             im = pg.transform.scale(image, (self.cell_size, self.cell_size))

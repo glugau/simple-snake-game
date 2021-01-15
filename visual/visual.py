@@ -30,9 +30,15 @@ def rotated_body_piece(bodypiece, direction):
 
 
 def find_turn(newdir, olddir):
-    if (olddir == "up" and newdir == "left") or (olddir == "left" and newdir == "down") or (olddir == "down" and newdir == "right") or (olddir == "right" and newdir == "up"):
+    if (olddir == "up" and newdir == "left") or \
+            (olddir == "left" and newdir == "down") or\
+            (olddir == "down" and newdir == "right") or\
+            (olddir == "right" and newdir == "up"):
         return "left"
-    elif (olddir == "up" and newdir == "right") or (olddir == "left" and newdir == "up") or (olddir == "down" and newdir == "left") or (olddir == "right" and newdir == "down"):
+    elif (olddir == "up" and newdir == "right") or\
+            (olddir == "left" and newdir == "up") or\
+            (olddir == "down" and newdir == "left") or\
+            (olddir == "right" and newdir == "down"):
         return "right"
     return "straight"
 
@@ -60,7 +66,7 @@ def visual_game(board_height, board_width, max_screen_size, fps):
     pg.display.set_caption("Snake (trash edition)")
     done = False
     message_text, message_text_rect = write("Welcome to Snake!", (screen_size[1] / 2) - fontsize,
-                                        screen_size[0], font_small)
+                                            screen_size[0], font_small)
     while not done:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -76,7 +82,7 @@ def visual_game(board_height, board_width, max_screen_size, fps):
             best_score_text, best_score_text_rect = write("Best score " + str(best_score), screen_size[1] / 2,
                                                           screen_size[0], font)
             start_text, start_text_rect = write("Press any arrow to start!", (screen_size[1] / 2) + fontsize,
-                                                          screen_size[0], font_small)
+                                                screen_size[0], font_small)
             screen.fill((0, 255, 255))
             board.draw(screen)
             screen.blit(best_score_text, best_score_text_rect)
@@ -85,7 +91,10 @@ def visual_game(board_height, board_width, max_screen_size, fps):
             pg.display.update()
             for event in pg.event.get():
                 if event.type == pg.KEYDOWN:
-                    if event.key == pg.K_UP or event.key == pg.K_DOWN or event.key == pg.K_LEFT or event.key == pg.K_RIGHT:
+                    if event.key == pg.K_UP or \
+                            event.key == pg.K_DOWN or \
+                            event.key == pg.K_LEFT or \
+                            event.key == pg.K_RIGHT:
                         start_play = True
 
         while True:
@@ -114,7 +123,8 @@ def visual_game(board_height, board_width, max_screen_size, fps):
                 snake.eat()
 
             if snake.is_colliding():
-                message_text, message_text_rect = write("Game lost! Your score was " + str(len(snake.bodypos) + 1), (screen_size[1] / 2) - fontsize,
+                message_text, message_text_rect = write("Game lost! Your score was " + str(len(snake.bodypos) + 1),
+                                                        (screen_size[1] / 2) - fontsize,
                                                         screen_size[0], font_small)
                 if len(snake.bodypos) + 1 > best_score:
                     best_score = len(snake.bodypos) + 1
@@ -133,14 +143,22 @@ def visual_game(board_height, board_width, max_screen_size, fps):
             board.draw_element(rotated_snake_head, snake.pos, screen)
             for i in range(len(snake.bodypos)):
                 if i == len(snake.bodypos) - 1:
-                    board.draw_element(rotated_body_piece(snake_tail, snake.direction_history[i]), snake.bodypos[i], screen)
+                    board.draw_element(rotated_body_piece(snake_tail, snake.direction_history[i]),
+                                       snake.bodypos[i],
+                                       screen)
                 elif snake.direction_history[i] == snake.direction_history[i + 1]:
-                    board.draw_element(rotated_body_piece(snake_body, snake.direction_history[i]), snake.bodypos[i], screen)
+                    board.draw_element(rotated_body_piece(snake_body, snake.direction_history[i]),
+                                       snake.bodypos[i],
+                                       screen)
                 else:
                     if find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "left":
-                        board.draw_element(rotated_body_piece(snake_angle_left, snake.direction_history[i]), snake.bodypos[i], screen)
+                        board.draw_element(rotated_body_piece(snake_angle_left, snake.direction_history[i]),
+                                           snake.bodypos[i],
+                                           screen)
                     elif find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "right":
-                        board.draw_element(rotated_body_piece(snake_angle_right, snake.direction_history[i]), snake.bodypos[i], screen)
+                        board.draw_element(rotated_body_piece(snake_angle_right, snake.direction_history[i]),
+                                           snake.bodypos[i],
+                                           screen)
             pg.display.update()
             for event in pg.event.get():
                 if event.type == pg.KEYDOWN:

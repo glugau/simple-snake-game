@@ -1,8 +1,7 @@
 # play the game through the command line.
 # call the function in the main file!
 from snake import Snake
-from food import Food, spawn_food
-import random
+from food import spawn_food
 
 
 def print_2d_list(inlist):
@@ -11,6 +10,7 @@ def print_2d_list(inlist):
         for li in i:
             line += li
         print(line)
+
 
 def cmd_game(board_height, board_width):
     chars = {
