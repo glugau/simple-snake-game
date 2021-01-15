@@ -74,8 +74,8 @@ class Snake:
         for i in range(len(self.fed_body_state)):
             if i == 0:
                 self.fed_body_state[i] = False
-            elif 0 < i:
-                self.fed_body_state[i] = fed_body_old[i - 1]
+            elif 1 < i:
+                self.fed_body_state[i] = fed_body_old[i - 2]
 
     def is_colliding(self):
         for p in self.bodypos:
