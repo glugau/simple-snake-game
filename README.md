@@ -21,4 +21,6 @@ visual_max_size = 800
 visual_framerate = 3  # frames per second, which then also is the speed of the snake
 ```
 
+The controls are the arrow keys for the visual game, and for the command line, you type "up", "down", "left", "right", or nothing every frame when prompted.
+
 Have fun playing :)
