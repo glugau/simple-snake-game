@@ -12,7 +12,7 @@ play_in_cmd = False  # use the command line game? If false, the normal visual ga
 # max pixels in the inner window of the game.
 # The full window will be 100 pixels wider and 100px higher
 visual_max_size = 800
-visual_framerate = 5  # frames per second, which then also is the speed of the snake
+visual_framerate = 7  # frames per second, which then also is the speed of the snake
 
 if board_width % 2 == 0:
     board_width += 1

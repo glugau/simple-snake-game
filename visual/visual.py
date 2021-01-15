@@ -8,8 +8,12 @@ food_img = pg.image.load("./assets/heart.png")
 snake_head = pg.image.load("./assets/head.png")
 snake_body = pg.image.load("./assets/body.png")
 snake_tail = pg.image.load("./assets/tail.png")
+snake_fed_tail = pg.image.load("./assets/fedtail.png")
 snake_angle_left = pg.image.load("./assets/angle_left.png")
 snake_angle_right = pg.image.load("./assets/angle_right.png")
+snake_fed_body = pg.image.load("./assets/fedbody.png")
+snake_fed_angle_left = pg.image.load("./assets/fedangle_left.png")
+snake_fed_angle_right = pg.image.load("./assets/fedangle_right.png")
 pg.init()
 
 
@@ -142,23 +146,43 @@ def visual_game(board_height, board_width, max_screen_size, fps):
             board.draw_element(food_img, food.pos, screen)
             board.draw_element(rotated_snake_head, snake.pos, screen)
             for i in range(len(snake.bodypos)):
-                if i == len(snake.bodypos) - 1:
+                if snake.fed_body_state[i]:
+                    if i == len(snake.fed_body_state) - 1:
+                        board.draw_element(rotated_body_piece(snake_fed_tail, snake.direction_history[i]),
+                                           snake.bodypos[i],
+                                           screen)
+                    elif snake.direction_history[i] == snake.direction_history[i + 1]:
+                        board.draw_element(rotated_body_piece(snake_fed_body, snake.direction_history[i]),
+                                           snake.bodypos[i],
+                                           screen)
+                    else:
+                        if find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "left":
+                            board.draw_element(rotated_body_piece(snake_fed_angle_left, snake.direction_history[i]),
+                                               snake.bodypos[i],
+                                               screen)
+                        elif find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "right":
+                            board.draw_element(rotated_body_piece(snake_fed_angle_right, snake.direction_history[i]),
+                                               snake.bodypos[i],
+                                               screen)
+                elif i == len(snake.bodypos) - 1:
                     board.draw_element(rotated_body_piece(snake_tail, snake.direction_history[i]),
                                        snake.bodypos[i],
                                        screen)
-                elif snake.direction_history[i] == snake.direction_history[i + 1]:
-                    board.draw_element(rotated_body_piece(snake_body, snake.direction_history[i]),
-                                       snake.bodypos[i],
-                                       screen)
+                    continue
                 else:
-                    if find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "left":
-                        board.draw_element(rotated_body_piece(snake_angle_left, snake.direction_history[i]),
+                    if snake.direction_history[i] == snake.direction_history[i + 1]:
+                        board.draw_element(rotated_body_piece(snake_body, snake.direction_history[i]),
                                            snake.bodypos[i],
                                            screen)
-                    elif find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "right":
-                        board.draw_element(rotated_body_piece(snake_angle_right, snake.direction_history[i]),
-                                           snake.bodypos[i],
-                                           screen)
+                    else:
+                        if find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "left":
+                            board.draw_element(rotated_body_piece(snake_angle_left, snake.direction_history[i]),
+                                               snake.bodypos[i],
+                                               screen)
+                        elif find_turn(snake.direction_history[i], snake.direction_history[i + 1]) == "right":
+                            board.draw_element(rotated_body_piece(snake_angle_right, snake.direction_history[i]),
+                                               snake.bodypos[i],
+                                               screen)
             pg.display.update()
             for event in pg.event.get():
                 if event.type == pg.KEYDOWN:

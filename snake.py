@@ -33,6 +33,10 @@ class Snake:
             "up",
             "up"
         ]
+        self.fed_body_state = [
+            False,
+            False
+        ]
 
     def change_direction(self, axis):
         if self.direction == "up" and axis == "down":
@@ -66,6 +70,13 @@ class Snake:
                 continue
             self.direction_history[i] = directions_copy[i - 1]
 
+        fed_body_old = self.fed_body_state.copy()
+        for i in range(len(self.fed_body_state)):
+            if i == 0:
+                self.fed_body_state[i] = False
+            elif 0 < i:
+                self.fed_body_state[i] = fed_body_old[i - 1]
+
     def is_colliding(self):
         for p in self.bodypos:
             if p == self.pos:
@@ -82,3 +93,5 @@ class Snake:
 
         self.bodypos[-1] = [self.bodypos[-1][0] + Snake.directions[opposite_dir(self.direction_history[-1])][0],
                             self.bodypos[-1][1] + Snake.directions[opposite_dir(self.direction_history[-1])][1]]
+        self.fed_body_state.append(False)
+        self.fed_body_state[0] = True
