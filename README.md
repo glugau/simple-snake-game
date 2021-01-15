@@ -9,12 +9,14 @@ You can choose which version you want to play in the main.py file with this line
 
     play_in_cmd = False  # use the command line game? If false, the normal visual game will play.
 You also have a few settings that are pretty explicit in the same file:
-
-    board_height = 9
-    board_width = 19
+```
+board_height = 9
+board_width = 19
     
-    # max pixels in the inner window of the game. 
-    # The full window will be 100 pixels wider and 100px higher   
-    visual_max_size = 800
+# max pixels in the inner window of the game. 
+# The full window will be 100 pixels wider and 100px higher   
+visual_max_size = 800
+visual_framerate = 3  # frames per second, which then also is the speed of the snake
+```
 
 Have fun playing :)
