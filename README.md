@@ -1,5 +1,7 @@
 # Basic Snake Game
 This is a simple python remake of the game snake that I'm sure you know.
+It queues input, and accepts variable board sizes.
+It is also fully textured.
 This repo has 2 versions of the game:
 
  - A command line game. It can be played through the command line, but pauses every frame to wait for an input.
