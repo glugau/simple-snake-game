@@ -72,10 +72,6 @@ def visual_game(board_height, board_width, max_screen_size, fps):
     message_text, message_text_rect = write("Welcome to Snake!", (screen_size[1] / 2) - fontsize,
                                             screen_size[0], font_small)
     while not done:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                done = True
-
         board = Board(board_width, board_height, screen_size)
         snake = Snake()
         food = spawn_food(board_height, board_width, snake)
@@ -83,6 +79,20 @@ def visual_game(board_height, board_width, max_screen_size, fps):
 
         start_play = False
         while not start_play:
+            innerdone = False
+            for event in pg.event.get():
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_UP or \
+                            event.key == pg.K_DOWN or \
+                            event.key == pg.K_LEFT or \
+                            event.key == pg.K_RIGHT:
+                        start_play = True
+                if event.type == pg.QUIT:
+                    done = True
+                    innerdone = True
+                    break
+            if innerdone:
+                break
             best_score_text, best_score_text_rect = write("Best score " + str(best_score), screen_size[1] / 2,
                                                           screen_size[0], font)
             start_text, start_text_rect = write("Press any arrow to start!", (screen_size[1] / 2) + fontsize,
@@ -93,14 +103,8 @@ def visual_game(board_height, board_width, max_screen_size, fps):
             screen.blit(start_text, start_text_rect)
             screen.blit(message_text, message_text_rect)
             pg.display.update()
-            for event in pg.event.get():
-                if event.type == pg.KEYDOWN:
-                    if event.key == pg.K_UP or \
-                            event.key == pg.K_DOWN or \
-                            event.key == pg.K_LEFT or \
-                            event.key == pg.K_RIGHT:
-                        start_play = True
-
+        if done:
+            break
         while True:
 
             if len(queued_inputs) != 0:
